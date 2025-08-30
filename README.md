@@ -1,9 +1,5 @@
 <<<<<<< HEAD
 # SearchEngine_-Graduationwork
-=======
-# SearchEngine_-Graduationwork
-
-# Search Engine - Поисковая система
 
 ## Общее описание
 

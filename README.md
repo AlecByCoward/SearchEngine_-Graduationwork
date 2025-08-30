@@ -1,4 +1,4 @@
-# SearchEngine_-Graduationwork
+# SearchEngine_GraduationWork
 
 ## Общее описание
 

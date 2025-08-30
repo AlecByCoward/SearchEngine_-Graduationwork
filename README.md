@@ -22,36 +22,6 @@
 - **SearchServer** - основной класс, обрабатывающий поисковые запросы с использованием многопоточности
 - **main.cpp** - точка входа в приложение
 
-## Структура проекта
-
-```
-SearchEngine_Graduationwork/
-├── CMakeLists.txt                    # Головной CMakeLists
-├── README.md
-├── config.json
-├── requests.json
-├── resources/
-│   ├── file1.txt
-│   └── file2.txt
-├── src/                             # Основная программа
-│   ├── CMakeLists.txt               
-│   ├── main.cpp
-│   ├── headers/
-│   │   ├── ConverterJSON.h
-│   │   ├── InvertedIndex.h
-│   │   └── SearchServer.h
-│   └── source/
-│       ├── ConverterJSON.cpp
-│       ├── InvertedIndex.cpp
-│       └── SearchServer.cpp
-└── tests/                           # Модульные тесты
-    ├── CMakeLists.txt               
-    ├── test_main.cpp
-    ├── test_converter.cpp
-    ├── test_inverted_index.cpp
-    └── test_search_server.cpp
-```
-
 ## Формат файлов
 
 ### config.json

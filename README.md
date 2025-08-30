@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SearchEngine_-Graduationwork
 
 ## Общее описание

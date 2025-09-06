@@ -1,8 +1,11 @@
 {
   "config": {
-    "name": "SearchEngine",
-    "version": "0.1",
-    "max_responses": 5
-  },
-  "files": ["../resources/file001.txt", "../resources/file002.txt", "../resources/file003.txt"]
+    "name": "Search Engine",
+    "version": "1.0",
+    "max_responses": 5,
+    "thread_pool_size": 4,
+    "max_file_size_mb": 10,
+    "supported_extensions": [".txt", ".md"],
+    "log_level": "INFO"
+  }
 }

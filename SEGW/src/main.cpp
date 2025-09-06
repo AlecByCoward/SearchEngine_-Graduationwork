@@ -6,9 +6,8 @@
 
 int main() {
     try {
-        std::cout << "=== Search Engine Starting ===" << std::endl;
+        std::cout << "Search Engine Starting" << std::endl;
         
-        // Засекаем время выполнения
         auto startTime = std::chrono::high_resolution_clock::now();
         
         // Инициализация JSON конвертера (с проверкой поля "name")

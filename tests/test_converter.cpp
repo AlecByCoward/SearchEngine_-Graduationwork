@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../src/headers/ConverterJSON.h"
+#include "../SEGW/include/ConverterJSON.h"
 #include <fstream>
 #include <filesystem>
 
@@ -30,7 +30,7 @@ protected:
             }}
         };
         
-        std::ofstream file("test_config.json");
+        std::ofstream file("config.json");
         file << configJson.dump(4);
     }
     
@@ -43,7 +43,7 @@ protected:
             }}
         };
         
-        std::ofstream file("test_requests.json");
+        std::ofstream file("requests.json");
         file << requestsJson.dump(4);
     }
     
@@ -58,8 +58,8 @@ protected:
     }
     
     void cleanupTestFiles() {
-        std::filesystem::remove("test_config.json");
-        std::filesystem::remove("test_requests.json");
+        std::filesystem::remove("config.json");
+        std::filesystem::remove("requests.json");
         std::filesystem::remove_all("test_resources");
         std::filesystem::remove_all("JSON");
     }
@@ -77,7 +77,7 @@ TEST_F(ConverterJSONTest, RequiredNameFieldPresent) {
         {"files", {"test.txt"}}
     };
     
-    std::ofstream file("test_config.json");
+    std::ofstream file("config.json");
     file << validConfig.dump(4);
     file.close();
     
@@ -99,7 +99,7 @@ TEST_F(ConverterJSONTest, RequiredNameFieldMissing) {
         {"files", {"test.txt"}}
     };
     
-    std::ofstream file("test_config.json");
+    std::ofstream file("config.json");
     file << invalidConfig.dump(4);
     file.close();
     
@@ -120,7 +120,7 @@ TEST_F(ConverterJSONTest, EmptyNameField) {
         {"files", {"test.txt"}}
     };
     
-    std::ofstream file("test_config.json");
+    std::ofstream file("config.json");
     file << invalidConfig.dump(4);
     file.close();
     
@@ -137,7 +137,7 @@ TEST_F(ConverterJSONTest, MissingConfigSection) {
         // Нет секции "config"
     };
     
-    std::ofstream file("test_config.json");
+    std::ofstream file("config.json");
     file << invalidConfig.dump(4);
     file.close();
     
@@ -236,7 +236,7 @@ TEST_F(ConverterJSONTest, MissingDocumentFiles) {
         }}
     };
     
-    std::ofstream file("test_config.json");
+    std::ofstream file("config.json");
     file << configWithMissingFile.dump(4);
     file.close();
     
@@ -280,13 +280,13 @@ TEST_F(ConverterJSONTest, DefaultValues) {
         {"files", {"test.txt"}}
     };
     
-    std::ofstream file("test_config.json");
+    std::ofstream file("config.json");
     file << minimalConfig.dump(4);
     file.close();
     
     ConverterJSON converter;
     
     EXPECT_EQ(converter.GetAppName(), "Minimal Engine");
-    EXPECT_EQ(converter.GetVersion(), "1.0");  // Значение по умолчанию
+    EXPECT_EQ(converter.GetVersion(), "0.1");  // Значение по умолчанию
     EXPECT_GT(converter.GetResponsesLimit(), 0);  // Должно быть больше 0
 }

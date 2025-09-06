@@ -7,5 +7,12 @@
     "max_file_size_mb": 10,
     "supported_extensions": [".txt", ".md"],
     "log_level": "INFO"
-  }
+  },
+  "files": [
+    "resources/file001.txt",
+    "resources/file002.txt",
+    "resources/file003.txt",   
+    "resources/file004.txt",
+    "resources/file005.txt"
+  ]
 }

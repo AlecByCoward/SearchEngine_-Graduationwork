@@ -1,0 +1,9 @@
+{
+    "config": {
+        "max_responses": 0,
+        "name": "Test Engine"
+    },
+    "files": [
+        "test.txt"
+    ]
+}

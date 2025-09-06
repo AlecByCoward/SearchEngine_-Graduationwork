@@ -1,0 +1,75 @@
+{
+    "answers": {
+        "request001": {
+            "relevance": [
+                {
+                    "docid": 0,
+                    "rank": 1.0
+                },
+                {
+                    "docid": 2,
+                    "rank": 1.0
+                },
+                {
+                    "docid": 1,
+                    "rank": 0.5
+                },
+                {
+                    "docid": 3,
+                    "rank": 0.5
+                },
+                {
+                    "docid": 4,
+                    "rank": 0.25
+                }
+            ],
+            "result": true
+        },
+        "request002": {
+            "relevance": [
+                {
+                    "docid": 0,
+                    "rank": 1.0
+                },
+                {
+                    "docid": 1,
+                    "rank": 0.3333333432674408
+                },
+                {
+                    "docid": 2,
+                    "rank": 0.3333333432674408
+                },
+                {
+                    "docid": 3,
+                    "rank": 0.3333333432674408
+                },
+                {
+                    "docid": 4,
+                    "rank": 0.3333333432674408
+                }
+            ],
+            "result": true
+        },
+        "request003": {
+            "relevance": [
+                {
+                    "docid": 2,
+                    "rank": 1.0
+                },
+                {
+                    "docid": 0,
+                    "rank": 0.3333333432674408
+                },
+                {
+                    "docid": 1,
+                    "rank": 0.3333333432674408
+                },
+                {
+                    "docid": 3,
+                    "rank": 0.3333333432674408
+                }
+            ],
+            "result": true
+        }
+    }
+}

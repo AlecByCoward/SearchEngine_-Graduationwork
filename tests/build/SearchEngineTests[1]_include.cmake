@@ -1,0 +1,5 @@
+if(EXISTS "/Users/alecbycow/Documents/SearchEngine_GraduationWork/tests/build/SearchEngineTests[1]_tests.cmake")
+  include("/Users/alecbycow/Documents/SearchEngine_GraduationWork/tests/build/SearchEngineTests[1]_tests.cmake")
+else()
+  add_test(SearchEngineTests_NOT_BUILT SearchEngineTests_NOT_BUILT)
+endif()

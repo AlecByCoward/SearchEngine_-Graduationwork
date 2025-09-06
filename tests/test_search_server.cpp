@@ -1,8 +1,8 @@
 #include <vector>
 #include <string>
 #include <gtest/gtest.h>
-#include "inverted_index.h"
-#include "server.h"
+#include "../SEGW/include/InvertedIndex.h"
+#include "../SEGW/include/SearchServer.h"
 using namespace std;
 
 TEST(TestCaseSearchServer, TestSimple) {
@@ -26,7 +26,7 @@ TEST(TestCaseSearchServer, TestSimple) {
     };
 
     InvertedIndex idx;
-    idx.updateDocumentBase(docs);
+    idx.UpdateDocumentBase(docs);
 
     SearchServer srv(idx);
 
@@ -73,7 +73,7 @@ TEST(TestCaseSearchServer, TestTop5) {
     };
 
     InvertedIndex idx;
-    idx.updateDocumentBase(docs);
+    idx.UpdateDocumentBase(docs);
 
     SearchServer srv(idx);
 

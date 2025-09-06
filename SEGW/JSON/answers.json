@@ -4,52 +4,64 @@
             "relevance": [
                 {
                     "docid": 0,
-                    "rank": 2.2384631633758545
+                    "rank": 1.0
                 },
                 {
                     "docid": 2,
-                    "rank": 2.2384631633758545
+                    "rank": 1.0
                 },
                 {
                     "docid": 1,
-                    "rank": 1.1192315816879272
+                    "rank": 0.5
+                },
+                {
+                    "docid": 4,
+                    "rank": 0.5
                 }
             ],
-            "result": "true"
+            "result": true
         },
         "request002": {
             "relevance": [
                 {
                     "docid": 0,
-                    "rank": 1.678847312927246
+                    "rank": 1.0
                 },
                 {
                     "docid": 1,
-                    "rank": 0.5596157908439636
+                    "rank": 0.3333333432674408
                 },
                 {
                     "docid": 2,
-                    "rank": 0.5596157908439636
+                    "rank": 0.3333333432674408
+                },
+                {
+                    "docid": 4,
+                    "rank": 0.3333333432674408
                 }
             ],
-            "result": "true"
+            "result": true
         },
         "request003": {
             "relevance": [
                 {
                     "docid": 2,
-                    "rank": 1.678847312927246
+                    "rank": 1.0
                 },
                 {
                     "docid": 0,
-                    "rank": 0.5596157908439636
+                    "rank": 0.3333333432674408
                 },
                 {
                     "docid": 1,
-                    "rank": 0.5596157908439636
+                    "rank": 0.3333333432674408
+                },
+                {
+                    "docid": 4,
+                    "rank": 0.3333333432674408
                 }
             ],
-            "result": "true"
+            "result": true
         }
     }
 }

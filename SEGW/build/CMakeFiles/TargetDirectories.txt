@@ -1,0 +1,4 @@
+/Users/alecbycow/Documents/SearchEngine_GraduationWork/SEGW/build/CMakeFiles/SearchEngine.dir
+/Users/alecbycow/Documents/SearchEngine_GraduationWork/SEGW/build/CMakeFiles/test.dir
+/Users/alecbycow/Documents/SearchEngine_GraduationWork/SEGW/build/CMakeFiles/edit_cache.dir
+/Users/alecbycow/Documents/SearchEngine_GraduationWork/SEGW/build/CMakeFiles/rebuild_cache.dir

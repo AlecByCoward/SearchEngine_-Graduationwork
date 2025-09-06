@@ -14,15 +14,41 @@ ConverterJSON::~ConverterJSON() {}
 
 // Поиск файла в возможных локациях
 std::string ConverterJSON::findFile(const std::string& filename) const {
+    // Получаем путь к исполняемому файлу
+    std::string executablePath = std::filesystem::current_path();
+    
+    // Определяем базовую директорию проекта
+    std::string projectRoot;
+    
+    // Если мы в папке build, поднимаемся на уровень выше
+    if (executablePath.length() >= 6 && 
+        (executablePath.substr(executablePath.length() - 6) == "/build" ||
+         executablePath.substr(executablePath.length() - 6) == "\\build")) {
+        projectRoot = executablePath.substr(0, executablePath.length() - 6); // убираем "/build"
+    } else {
+        // Проверяем, есть ли папка SEGW в текущей директории
+        if (std::filesystem::exists(executablePath + "/SEGW")) {
+            projectRoot = executablePath + "/SEGW";
+        } else {
+            // Иначе используем текущую директорию
+            projectRoot = executablePath;
+        }
+    }
+    
     std::vector<std::string> searchPaths = {
-        filename,                           // Текущая директория
-        "./" + filename,                   // Явно текущая директория
-        "../" + filename,                  // Родительская директория
-        "../../" + filename,               // На два уровня выше
-        "./JSON/" + filename,              // В поддиректории JSON
-        "../JSON/" + filename,             // JSON в родительской
-        "./config/" + filename,            // В поддиректории config
-        "../config/" + filename            // config в родительской
+        filename,                                    // Текущая директория
+        "./" + filename,                            // Явно текущая директория
+        "../" + filename,                           // Родительская директория
+        "../../" + filename,                        // На два уровня выше
+        projectRoot + "/" + filename,               // В корне проекта
+        projectRoot + "/JSON/" + filename,          // В папке JSON проекта
+        projectRoot + "/resources/" + filename,      // В папке resources проекта
+        "./JSON/" + filename,                       // В поддиректории JSON
+        "../JSON/" + filename,                      // JSON в родительской
+        "./config/" + filename,                     // В поддиректории config
+        "../config/" + filename,                    // config в родительской
+        "../../JSON/" + filename,                   // JSON на два уровня выше
+        "../../resources/" + filename                // resources на два уровня выше
     };
 
     for (const auto& path : searchPaths) {
@@ -32,7 +58,8 @@ std::string ConverterJSON::findFile(const std::string& filename) const {
     }
 
     throw std::runtime_error("File not found: " + filename +
-                           ". Searched in multiple locations.");
+                           ". Searched in multiple locations including: " + 
+                           projectRoot + "/JSON/");
 }
 
 // Загрузка конфигурации

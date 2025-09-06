@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
 #include <gtest/gtest.h>
-#include "inverted_index.h"
+#include "../SEGW/include/InvertedIndex.h"
 
 using namespace std;
 
@@ -13,10 +13,10 @@ void TestInvertedIndexFunctionality(
     std::vector<std::vector<Entry>> result;
     InvertedIndex idx;
 
-    idx.updateDocumentBase(docs);
+    idx.UpdateDocumentBase(docs);
 
     for(auto& request : requests) {
-        std::vector<Entry> word_count = idx.getWordCount(request);
+        std::vector<Entry> word_count = idx.GetWordCount(request);
         result.push_back(word_count);
     }
 

@@ -15,11 +15,20 @@ struct Entry {
     }
 };
 
+// Структура для статистики индекса
+struct IndexStats {
+    size_t totalDocuments = 0;
+    size_t totalWords = 0;
+    size_t totalEntries = 0;
+};
+
 class InvertedIndex {
 public:
     void UpdateDocumentBase(const vector<string>& input_docs);
     vector<Entry> GetWordCount(const string& word) const;
     size_t GetDocumentCount() const { return docs_.size(); }
+    bool ContainsWord(const string& word) const;
+    IndexStats GetStats() const;
 
 private:
     vector<string> docs_;

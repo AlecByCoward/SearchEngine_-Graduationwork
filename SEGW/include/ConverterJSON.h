@@ -30,10 +30,14 @@ private:
     std::vector<std::string> filePaths; 
     size_t max_responses;               
     std::string appName;                
-    std::string version;                 
+    std::string version;
+    bool auto_discover_files;
+    size_t max_files_to_process;
+    std::string resources_directory;
 
     std::string findFile(const std::string& filename) const;
     void loadConfig();
+    void discoverFiles();
 
 public:
     ConverterJSON();

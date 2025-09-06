@@ -6,13 +6,29 @@
     "thread_pool_size": 4,
     "max_file_size_mb": 10,
     "supported_extensions": [".txt", ".md"],
-    "log_level": "INFO"
+    "log_level": "INFO",
+    "auto_discover_files": true,
+    "max_files_to_process": 5,
+    "resources_directory": "resources"
   },
-  "files": [
-    "resources/file001.txt",
-    "resources/file002.txt",
-    "resources/file003.txt",   
-    "resources/file004.txt",
-    "resources/file005.txt"
-  ]
+  "_documentation": {
+    "description": "Search Engine Configuration File",
+    "fields": {
+      "name": "Application name (required field)",
+      "version": "Application version",
+      "max_responses": "Maximum number of search results to return per query",
+      "thread_pool_size": "Number of threads for parallel processing",
+      "max_file_size_mb": "Maximum file size in MB to process",
+      "supported_extensions": "File extensions that can be processed",
+      "log_level": "Logging level (DEBUG, INFO, WARNING, ERROR)",
+      "auto_discover_files": "Automatically find files in resources directory (true/false)",
+      "max_files_to_process": "Maximum number of files to process when auto_discover_files is true",
+      "resources_directory": "Directory name where files are located (relative to project root)"
+    },
+    "usage_examples": {
+      "auto_discovery_mode": "Set auto_discover_files to true and specify max_files_to_process",
+      "manual_mode": "Set auto_discover_files to false and use 'files' array to specify exact files"
+    }
+  }
 }
+

@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 // Конструктор
-ConverterJSON::ConverterJSON() : max_responses(5) {
+ConverterJSON::ConverterJSON() : max_responses(5), auto_discover_files(false), max_files_to_process(10), resources_directory("resources") {
     loadConfig();
 }
 
@@ -107,23 +107,46 @@ void ConverterJSON::loadConfig() {
             }
         }
 
-        // Загрузка списка файлов
-        if (configJson.contains("files") && configJson["files"].is_array()) {
-            for (const auto& file : configJson["files"]) {
-                if (file.is_string()) {
-                    filePaths.push_back(file.get<std::string>());
+        // Загрузка новых параметров
+        if (config.contains("auto_discover_files")) {
+            auto_discover_files = config["auto_discover_files"].get<bool>();
+        }
+
+        if (config.contains("max_files_to_process")) {
+            max_files_to_process = config["max_files_to_process"].get<size_t>();
+        }
+
+        if (config.contains("resources_directory")) {
+            resources_directory = config["resources_directory"].get<std::string>();
+        }
+
+        // Загрузка списка файлов или автоматическое обнаружение
+        if (auto_discover_files) {
+            discoverFiles();
+        } else {
+            // Старый способ - загрузка из списка files
+            if (configJson.contains("files") && configJson["files"].is_array()) {
+                for (const auto& file : configJson["files"]) {
+                    if (file.is_string()) {
+                        filePaths.push_back(file.get<std::string>());
+                    }
                 }
             }
         }
 
         if (filePaths.empty()) {
-            throw std::runtime_error("No files specified in config.json");
+            throw std::runtime_error("No files found for processing");
         }
 
         std::cout << "Configuration loaded successfully:" << std::endl;
         std::cout << "  Name: " << appName << std::endl;
         std::cout << "  Version: " << version << std::endl;
         std::cout << "  Max responses: " << max_responses << std::endl;
+        std::cout << "  Auto discover files: " << (auto_discover_files ? "enabled" : "disabled") << std::endl;
+        if (auto_discover_files) {
+            std::cout << "  Max files to process: " << max_files_to_process << std::endl;
+            std::cout << "  Resources directory: " << resources_directory << std::endl;
+        }
         std::cout << "  Files count: " << filePaths.size() << std::endl;
 
     } catch (const std::exception& e) {
@@ -263,4 +286,63 @@ std::string ConverterJSON::GetAppName() const {
 // Получение версии приложения
 std::string ConverterJSON::GetVersion() const {
     return version;
+}
+
+// Автоматическое обнаружение файлов в папке resources
+void ConverterJSON::discoverFiles() {
+    try {
+        // Получаем путь к папке resources
+        std::string resourcesPath = findFile(resources_directory);
+        
+        if (!std::filesystem::exists(resourcesPath)) {
+            throw std::runtime_error("Resources directory not found: " + resources_directory);
+        }
+
+        if (!std::filesystem::is_directory(resourcesPath)) {
+            throw std::runtime_error("Resources path is not a directory: " + resourcesPath);
+        }
+
+        // Получаем список всех файлов в папке
+        std::vector<std::string> allFiles;
+        for (const auto& entry : std::filesystem::directory_iterator(resourcesPath)) {
+            if (entry.is_regular_file()) {
+                std::string filename = entry.path().filename().string();
+                
+                // Проверяем расширение файла
+                bool supportedExtension = false;
+                std::vector<std::string> supportedExtensions = {".txt", ".md"};
+                for (const auto& ext : supportedExtensions) {
+                    if (filename.length() >= ext.length() && 
+                        filename.substr(filename.length() - ext.length()) == ext) {
+                        supportedExtension = true;
+                        break;
+                    }
+                }
+                
+                if (supportedExtension) {
+                    allFiles.push_back(resources_directory + "/" + filename);
+                }
+            }
+        }
+
+        // Сортируем файлы по имени для предсказуемого порядка
+        std::sort(allFiles.begin(), allFiles.end());
+
+        // Ограничиваем количество файлов
+        size_t filesToAdd = std::min(allFiles.size(), max_files_to_process);
+        filePaths.reserve(filesToAdd);
+
+        for (size_t i = 0; i < filesToAdd; ++i) {
+            filePaths.push_back(allFiles[i]);
+        }
+
+        std::cout << "Auto-discovered " << filePaths.size() << " files from " << resources_directory << std::endl;
+        if (allFiles.size() > max_files_to_process) {
+            std::cout << "  (Limited to " << max_files_to_process << " files)" << std::endl;
+        }
+
+    } catch (const std::exception& e) {
+        std::cerr << "Error discovering files: " << e.what() << std::endl;
+        throw;
+    }
 }

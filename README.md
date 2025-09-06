@@ -95,8 +95,6 @@ make
 | `max_files_to_process` | Максимальное количество файлов при автопоиске | 10 |
 | `resources_directory` | Папка для поиска файлов | "resources" |
 
-Подробная документация: `SEGW/JSON/CONFIG_README.md`
-
 ### requests.json
 
 Содержит поисковые запросы для обработки:
